@@ -1,9 +1,11 @@
 #include <Arduino.h>
+#include <Wire.h>
 #include <IoAbstractionWire.h>
 #include <LiquidCrystalIO.h>
-#include <Wire.h>
+#include <TM1637Display.h>
 
 LiquidCrystalI2C_RS_EN(lcd, 0x3F, false)
+TM1637Display display(12, 13);
 
 void i2cscanner() {
   byte error, address;
@@ -54,6 +56,9 @@ void setup() {
   lcd.backlight();
   lcd.clear();
   Serial.println("lcd initialized");
+
+  display.setBrightness(0x0a);
+  Serial.println("digits display initialized");
 }
 
 void loop() {
