@@ -1,46 +1,39 @@
 #include <Arduino.h>
-#include <Wire.h>
 #include <IoAbstractionWire.h>
 #include <LiquidCrystalIO.h>
 #include <TM1637Display.h>
+#include <Wire.h>
 
-LiquidCrystalI2C_RS_EN(lcd, 0x3F, false)
-TM1637Display display(12, 13);
+LiquidCrystalI2C_RS_EN(lcd, 0x3F, false) TM1637Display display(12, 13);
 
-void i2cscanner() {
+void i2cScanner() {
   byte error, address;
   int nDevices;
- 
+
   Serial.println("Scanning...");
- 
+
   nDevices = 0;
-  for(address = 1; address < 127; address++ )
-  {
+  for (address = 1; address < 127; address++) {
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
- 
-    if (error == 0)
-    {
+
+    if (error == 0) {
       Serial.print("I2C device found at address 0x");
-      if (address<16)
-        Serial.print("0");
-      Serial.print(address,HEX);
+      if (address < 16) Serial.print("0");
+      Serial.print(address, HEX);
       Serial.println("  !");
- 
+
       nDevices++;
-    }
-    else if (error==4)
-    {
+    } else if (error == 4) {
       Serial.print("Unknown error at address 0x");
-      if (address<16)
-        Serial.print("0");
-      Serial.println(address,HEX);
-    }    
+      if (address < 16) Serial.print("0");
+      Serial.println(address, HEX);
+    }
   }
   if (nDevices == 0)
     Serial.println("No I2C devices found\n");
   else
-    Serial.println("done\n");  
+    Serial.println("done\n");
 }
 
 void setup() {
@@ -49,8 +42,8 @@ void setup() {
 
   Wire.begin();
 
-  i2cscanner();
-  
+  i2cScanner();
+
   lcd.begin(20, 4);
   lcd.configureBacklightPin(3);
   lcd.backlight();
@@ -61,5 +54,4 @@ void setup() {
   Serial.println("digits display initialized");
 }
 
-void loop() {
-}
+void loop() {}
