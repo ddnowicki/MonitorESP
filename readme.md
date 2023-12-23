@@ -1,6 +1,6 @@
 # MonitorESP
 
-MonitorESP is a powerful ESP8266-based project crafted to gather real-time system metrics, including processor temperature, from a connected computer. This versatile project utilizes a 20x4 I2C LCD and TM1637 to elegantly display hardware and time information.
+MonitorESP is a powerful project based on ESP8266 that is designed to display the current status of your computer and the current time.
 
 ## Requirements
 
