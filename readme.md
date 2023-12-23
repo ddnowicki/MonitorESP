@@ -1,5 +1,25 @@
-MonitorESP is a versatile ESP8266-based project designed to retrieve real-time system metrics, including processor temperature, from a connected computer. The collected data is then elegantly displayed on a 4-digit LCD, providing both hardware and time information seamlessly.
+# MonitorESP
 
-<br />
+MonitorESP is a powerful ESP8266-based project crafted to gather real-time system metrics, including processor temperature, from a connected computer. This versatile project utilizes a 20x4 I2C LCD and TM1637 to elegantly display hardware and time information.
 
-*Made with love by Daniel*
+## Requirements
+
+Ensure you have the following tools and components:
+
+- **VS Code with PlatformIO:** The project is developed using Visual Studio Code with the PlatformIO extension for seamless integration.
+
+- **ESP8266:** You'll need an ESP8266 microcontroller to run MonitorESP and collect system metrics.
+
+- **LCD 20x4 I2C:** A 20x4 I2C LCD is employed to visually represent the real-time data collected by the project.
+
+- **TM1637:** This item displays information about the current time
+
+## Credits
+
+*Made with love by xDanielo.* Thank you for contributing to the open-source community and creating a versatile tool for monitoring system metrics! Feel free to reach out for support or to share your experiences with MonitorESP.
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE). Feel free to modify and share your enhancements with the community.
+
+Your contributions to MonitorESP are valuable, and together, we can make it even more robust and feature-rich. Happy monitoring!
