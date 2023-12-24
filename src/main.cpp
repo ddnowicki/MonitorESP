@@ -1,8 +1,7 @@
 #include <Arduino.h>
 
-#include "i2c/i2c.hpp"
 #include "displays/lcd.hpp"
-
+#include "i2c/i2c.hpp"
 
 void setup() {
   Serial.begin(115200);
@@ -12,6 +11,4 @@ void setup() {
   lcd lcd(i2c.scan());
 }
 
-void loop() {
-  yield();
-}
+void loop() { yield(); }
