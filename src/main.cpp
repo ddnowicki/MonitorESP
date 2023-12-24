@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "i2c/i2c.hpp"
-#include "i2c/lcd.hpp"
+#include "displays/lcd.hpp"
 
 
 void setup() {
