@@ -10,10 +10,13 @@
 digits digits(12, 13);
 i2c i2c;
 lcd lcd(i2c.scan());
-wifi wifi(NETNAME, PASSWORD);
 udp udp(3600);
 
 void setup() {
+  Serial.begin(115200);
+  Serial.println("\n\n\n");
+
+  wifi wifi();
 }
 
 void loop() {

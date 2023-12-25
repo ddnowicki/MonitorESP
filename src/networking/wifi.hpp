@@ -2,8 +2,11 @@
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <WiFiManager.h>
 
 class wifi {
-public:
-    wifi(String ssid, String password);
+  WiFiManager wm;
+
+ public:
+  wifi();
 };
