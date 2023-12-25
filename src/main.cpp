@@ -1,57 +1,25 @@
 #include <Arduino.h>
-#include <IoAbstractionWire.h>
-#include <LiquidCrystalIO.h>
-#include <TM1637Display.h>
-#include <Wire.h>
 
-LiquidCrystalI2C_RS_EN(lcd, 0x3F, false) TM1637Display display(12, 13);
+#include "config.hpp"
+#include "displays/digits.hpp"
+#include "displays/lcd.hpp"
+#include "i2c/i2c.hpp"
+#include "networking/udp.hpp"
+#include "networking/wifi.hpp"
 
-void i2cScanner() {
-  byte error, address;
-  int nDevices;
-
-  Serial.println("Scanning...");
-
-  nDevices = 0;
-  for (address = 1; address < 127; address++) {
-    Wire.beginTransmission(address);
-    error = Wire.endTransmission();
-
-    if (error == 0) {
-      Serial.print("I2C device found at address 0x");
-      if (address < 16) Serial.print("0");
-      Serial.print(address, HEX);
-      Serial.println("  !");
-
-      nDevices++;
-    } else if (error == 4) {
-      Serial.print("Unknown error at address 0x");
-      if (address < 16) Serial.print("0");
-      Serial.println(address, HEX);
-    }
-  }
-  if (nDevices == 0)
-    Serial.println("No I2C devices found\n");
-  else
-    Serial.println("done\n");
-}
+digits digits(12, 13);
+i2c i2c;
+lcd lcd(i2c.scan());
+udp udp(3600);
 
 void setup() {
   Serial.begin(115200);
   Serial.println("\n\n\n");
 
-  Wire.begin();
-
-  i2cScanner();
-
-  lcd.begin(20, 4);
-  lcd.configureBacklightPin(3);
-  lcd.backlight();
-  lcd.clear();
-  Serial.println("lcd initialized");
-
-  display.setBrightness(0x0a);
-  Serial.println("digits display initialized");
+  wifi wifi();
 }
 
-void loop() {}
+void loop() {
+  digits.print(udp.currentTime());
+  delay(1000);
+}
