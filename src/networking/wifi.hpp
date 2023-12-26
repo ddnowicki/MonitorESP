@@ -8,5 +8,5 @@ class wifi {
   WiFiManager wm;
 
  public:
-  wifi();
+  void init();
 };

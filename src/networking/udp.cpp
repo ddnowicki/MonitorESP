@@ -8,8 +8,6 @@ udp::udp(const long utcOffsetInSeconds)
 std::pair<int, int> udp::currentTime() {
   timeClient.update();
 
-  int hours = timeClient.getHours();
-  int minutes = timeClient.getMinutes();
-
-  return std::pair<int, int>(hours, minutes);
+  Serial.println(timeClient.getFormattedTime());
+  return std::pair<int, int>(timeClient.getHours(), timeClient.getMinutes());
 }

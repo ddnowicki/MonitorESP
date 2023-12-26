@@ -1,5 +1,3 @@
 #include "wifi.hpp"
 
-wifi::wifi() {
-  wm.autoConnect("AutoConnectAP");
-}
+void wifi::init() { wm.autoConnect("AutoConnectAP"); }

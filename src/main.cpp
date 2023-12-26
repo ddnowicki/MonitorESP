@@ -11,12 +11,13 @@ digits digits(12, 13);
 i2c i2c;
 lcd lcd(i2c.scan());
 udp udp(3600);
+wifi net;
 
 void setup() {
   Serial.begin(115200);
   Serial.println("\n\n\n");
 
-  wifi net();
+  net.init();
 }
 
 void loop() {
