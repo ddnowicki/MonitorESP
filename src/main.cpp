@@ -18,6 +18,8 @@ void setup() {
   Serial.println("\n\n\n");
 
   net.init();
+
+  Serial.println(net.requestGet("http://192.168.20.153:8085/data.json"));
 }
 
 void loop() {
