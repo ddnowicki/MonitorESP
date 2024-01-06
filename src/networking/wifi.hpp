@@ -4,8 +4,9 @@
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
 #include <WiFiManager.h>
+#include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <WiFiClient.h>
+#include <WiFiClientSecureBearSSL.h>
 
 class wifi {
   WiFiManager wm;

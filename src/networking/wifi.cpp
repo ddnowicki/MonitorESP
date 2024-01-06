@@ -3,36 +3,32 @@
 void wifi::init() { wm.autoConnect("AutoConnectAP"); }
 
 String wifi::requestGet(String adress) {
-  WiFiClient client;
-  HTTPClient http;
+  if ((WiFi.status() == WL_CONNECTED)) {
 
-  http.begin(client, adress);
+    std::unique_ptr<BearSSL::WiFiClientSecure>client(new BearSSL::WiFiClientSecure);
 
-  int httpResponseCode = http.GET();
+    client->setInsecure();
+    
+    HTTPClient https;
+    
+    Serial.print("[HTTPS] begin...\n");
+    if (https.begin(*client, adress)) {
+      Serial.print("[HTTPS] GET...\n");
+      int httpCode = https.GET();
+      if (httpCode > 0) {
+        Serial.printf("[HTTPS] GET... code: %d\n", httpCode);
+        if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
+          return https.getString();
+        }
+      } else {
+        Serial.printf("[HTTPS] GET... failed, error: %s\n", https.errorToString(httpCode).c_str());
+      }
 
-  String payload = "{}"; 
-
-  if (httpResponseCode>0) {
-    Serial.print("HTTP Response code: ");
-    Serial.println(httpResponseCode);
-    // payload = http.getString();
-    DynamicJsonDocument doc(49152);
-
-    DeserializationError error = deserializeJson(doc, http.getString(), DeserializationOption::NestingLimit(12));
-
-    if (error) {
-      Serial.print(F("deserializeJson() failed: "));
-      Serial.println(error.f_str());
+      https.end();
+    } else {
+      Serial.printf("[HTTPS] Unable to connect\n");
     }
-    JsonObject Children_0 = doc["Children"][0];
-    Serial.println(String(Children_0["Text"]));
   }
-  else {
-    Serial.print("Error code: ");
-    Serial.println(httpResponseCode);
-  }
-  // Free resources
-  http.end();
 
-  return payload;
+  return "{\"Sucess\":false}";
 }
