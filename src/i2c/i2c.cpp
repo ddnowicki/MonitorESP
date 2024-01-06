@@ -1,8 +1,6 @@
 #include "i2c.hpp"
 
-i2c::i2c() { 
-  Wire.begin();
-}
+i2c::i2c() { Wire.begin(); }
 
 int i2c::scan() {
   nDevices = 0;
@@ -18,6 +16,7 @@ int i2c::scan() {
       return strtol(addressStr, NULL, 16);
     }
   }
-  while(1);
+  while (1)
+    ;
   return 0x27;
 }

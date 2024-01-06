@@ -1,12 +1,13 @@
 #include <Arduino.h>
 
 #include "config.hpp"
-#include "json/json.hpp"
 #include "displays/digits.hpp"
 #include "displays/lcd.hpp"
 #include "i2c/i2c.hpp"
+#include "json/json.hpp"
 #include "networking/udp.hpp"
 #include "networking/wifi.hpp"
+
 
 digits digits(12, 13);
 i2c i2c;
